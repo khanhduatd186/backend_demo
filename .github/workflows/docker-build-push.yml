@@ -50,6 +50,6 @@ jobs:
       - name: Deploy locally with Docker Compose
         shell: cmd
         run: |
-          docker compose down
+          docker compose down -v
           docker compose up -d --build
 
