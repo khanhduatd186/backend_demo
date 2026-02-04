@@ -11,7 +11,8 @@ env:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    # Chạy trên self-hosted runner Windows của bạn
+    runs-on: [self-hosted, windows]
 
     steps:
       - name: Checkout repository
@@ -47,4 +48,10 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      # Deploy local trên máy self-hosted runner bằng docker compose
+      - name: Deploy locally with Docker Compose
+        run: |
+          docker compose down
+          docker compose up -d --build
 
