@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-api
+    depends_on:
+      - db
+    environment:
+      # Trùng với ConnectionStrings:DefaultConnection trong appsettings,
+      # nhưng dùng host là tên service "db" thay vì "localhost"
+      - ConnectionStrings__DefaultConnection=Host=db;Database=backend_db;Username=postgres;Password=vcnttttnyt
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5000:80"
+    networks:
+      - backend-network
+
+  db:
+    image: postgres:16
+    container_name: backend-db
+    environment:
+      - POSTGRES_DB=backend_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=vcnttttnyt
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+volumes:
+  db-data:
+
+networks:
+  backend-network:
+    driver: bridge
+
