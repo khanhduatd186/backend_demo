@@ -11,7 +11,7 @@ services:
     environment:
       # Trùng với ConnectionStrings:DefaultConnection trong appsettings,
       # nhưng dùng host là tên service "db" thay vì "localhost"
-      - ConnectionStrings__DefaultConnection=Host=db;Database=backend_db;Username=postgres;Password=vcnttttnyt
+      - ConnectionStrings__DefaultConnection=Host=db;Database=backend_db;Username=postgres;Password=duhk123
       - ASPNETCORE_URLS=http://+:80
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
@@ -25,7 +25,7 @@ services:
     environment:
       - POSTGRES_DB=backend_db
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=vcnttttnyt
+      - POSTGRES_PASSWORD=duhk123
     ports:
       - "5432:5432"
     volumes:
